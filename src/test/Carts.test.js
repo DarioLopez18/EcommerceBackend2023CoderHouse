@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import request from "supertest";
 
-// Importa tu servidor (asegúrate de ajustar la ruta según la estructura de tu proyecto)
 import app from "../app.js";
 import { generateToken } from "../utils.js";
 
