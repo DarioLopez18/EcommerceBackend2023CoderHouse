@@ -44,10 +44,6 @@ app.use(
     store: MongoStore.create({
       mongoUrl: config.url,
       dbName: config.dbName,
-      mongoOptions: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
       ttl: process.env.ttl,
     }),
     secret: "CoderSecret",
@@ -112,3 +108,5 @@ const runServer = () => {
 };
 
 runServer();
+
+export default app;

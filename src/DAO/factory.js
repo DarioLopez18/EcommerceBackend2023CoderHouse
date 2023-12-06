@@ -10,13 +10,13 @@ export let Cart;
 export let Session;
 export let Ticket;
 
+console.log(`persistence with: ${process.env.persistence}`)
+
 switch (config.persistence) {
   case "MONGO":
     mongoose
       .connect(config.url, {
         dbName: config.dbName,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
       })
       .then(() => console.log("Database Connected Successfully"))
       .catch((err) => CustomError.createError(err));

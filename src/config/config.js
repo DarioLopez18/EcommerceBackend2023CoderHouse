@@ -3,8 +3,8 @@ config();
 
 export default {
   persistence: process.env.persistence,
-  port: process.env.port || 8080,
-  url: process.env.url,
+  port: process.env.PORT || 8080,
+  url: process.env.URL,
   dbName: process.env.dbName,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
@@ -14,7 +14,7 @@ export default {
   GITHUB_callbackurl: process.env.GITHUB_callbackurl,
   ttl: process.env.ttl,
   secret: process.env.secret,
-  privateKey: process.env.privateKey,
+  privateKey: process.env.PRIVATE_KEY,
   USER: process.env.USER,
   PASS: process.env.PASS,
   environment: process.env.environment,
