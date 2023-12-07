@@ -24,10 +24,12 @@ const userModel = mongoose.model(
       default: "not verified",
     },
     verificationCode: String,
-    documents: {
-      type: Array,
-      default: null,
-    },
+    documents: [
+      {
+        name: String,
+        reference: String,
+      },
+    ],
     last_connection: {
       type: Date,
       default: null,

@@ -1,0 +1,59 @@
+<!-- views/uploadDocuments.html -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Documents</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-TM6c5cK8C1c3g8JdKt5H1Aiz5XsMpg3zY4h3S7eLBU4z/CXjq+qBUynd6cqzV"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container mt-5">
+    <h1 class="mb-4">Upload Documents</h1>
+    <form id="uploadForm" enctype="multipart/form-data" style="max-width: 50%;margin:0 auto;">
+      <div class="form-group">
+        <label for="document" style="margin-bottom: 2rem;">Select Document(s):</label>
+        <input
+          type="file"
+          class="form-control-file"
+          name="document"
+          id="document"
+          multiple
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    <script>
+      document.getElementById('uploadForm').addEventListener('submit', function
+      (event) { event.preventDefault(); const formData = new FormData(this);
+      fetch('/api/users/:uid/documents', { method: 'POST', body: formData, })
+      .then(response => response.json()) .then(data => { console.log('Documents
+      uploaded successfully:', data); // Puedes redirigir o mostrar un mensaje
+      de éxito al usuario }) .catch(error => { console.error('Error uploading
+      documents:', error); // Puedes mostrar un mensaje de error al usuario });
+      });
+    </script>
+
+    <!-- Agrega el script de Bootstrap JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-LzQeNl0fx3jtMFXtJsGdhdej1sAIVgmUxFbAfERiHQ8Z9XSOp6LqDrK//f95gP1I"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-NBXUoDcYVViNBHxhEIaZcL4PwDf9Npb6TsiBYb7CCtV+g4+Cv2tweF5TBDHjqzuO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 import UserDTO from "../DTO/user.dto.js";
 import CustomError from "../errors/CustomError.js";
 import EErrors from "../errors/enums.js";
+import { generateUserErrorInfo } from "../errors/info.js";
 
 export default class UserRepository {
   constructor(userDAO, cartDAO) {
@@ -93,10 +94,17 @@ export default class UserRepository {
             info: generateCartErrorInfo({ pid }),
           });
         }
-        if (user.rol === "user") {
+        if (user.rol === "user" && user.documents.length >= 3) {
           user.rol = "premium";
           await this.userDAO.updateUser(user._id, user);
           return user;
+        } else {
+          CustomError.createError({
+            message: "You have not uploaded the complete documentation",
+            code: EErrors.USER_NOT_AUTHORIZED,
+            status: 401,
+            info: generateCartErrorInfo({ pid }),
+          });
         }
         user.rol = "user";
         await this.userDAO.updateUser(user._id, user);
@@ -110,8 +118,12 @@ export default class UserRepository {
         });
       }
     } catch (error) {
-      req.logger.fatal("Error al cambiar a usuario premium");
-      res.status(500).json({ error: error.message });
+      throw CustomError.createError({
+        message: "You have not uploaded the complete documentation",
+        code: EErrors.USER_NOT_AUTHORIZED,
+        status: 401,
+        info: generateUserErrorInfo({message:"You have not uploaded the complete documentation"}),
+      });
     }
   };
 }
