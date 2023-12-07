@@ -16,6 +16,10 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
 />
 </p>
 
+# Deployment de la aplicación 
+
+* https://ecommercebackend2023coderhouse-production.up.railway.app/
+
 # Acerca de como ejecutar la aplicación: 
 
 * Clonar el repositorio
