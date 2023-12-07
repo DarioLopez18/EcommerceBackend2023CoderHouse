@@ -1,4 +1,6 @@
 import UserDTO from "../DTO/user.dto.js";
+import CustomError from "../errors/CustomError.js";
+import EErrors from "../errors/enums.js";
 
 export default class UserRepository {
   constructor(userDAO, cartDAO) {
@@ -78,4 +80,38 @@ export default class UserRepository {
       throw e;
     }
   };
+
+  userPremium = async(id)=>{
+    try {
+      const user = await this.userDAO.getUserById(id);
+      if (user) {
+        if (user.rol === "admin") {
+          CustomError.createError({
+            message: "No authorized",
+            code: EErrors.USER_NOT_AUTHORIZED,
+            status: 401,
+            info: generateCartErrorInfo({ pid }),
+          });
+        }
+        if (user.rol === "user") {
+          user.rol = "premium";
+          await this.userDAO.updateUser(user._id, user);
+          return user;
+        }
+        user.rol = "user";
+        await this.userDAO.updateUser(user._id, user);
+        return user;
+      } else {
+        CustomError.createError({
+          message: "User not found",
+          code: EErrors.USER_NOT_EXISTS,
+          status: 404,
+          info: generateCartErrorInfo({ pid }),
+        });
+      }
+    } catch (error) {
+      req.logger.fatal("Error al cambiar a usuario premium");
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
