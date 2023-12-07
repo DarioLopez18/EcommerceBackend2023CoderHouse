@@ -84,29 +84,10 @@ export default class CartRepository {
         (product) => product.pid._id.toString() == pid.toString()
       );
       if (productValidate) {
-        if (product.stock < quantity) {
-          CustomError.createError({
-            name: "Error",
-            message: "Stock not available",
-            code: EErrors.STOCK_NOT_AVAILABLE,
-            info: generateProductsErrorInfo(product),
-          });
-        }
-        product.stock -= quantity;
         productValidate.quantity += quantity;
       } else {
-        if (product.stock >= quantity) {
-          product.stock -= quantity;
-          cart.products.push({ pid, quantity });
-          await this.cartDAO.updateCartById(cartId, cart);
-        } else {
-          CustomError.createError({
-            name: "Error",
-            message: "Stock not available",
-            code: EErrors.STOCK_NOT_AVAILABLE,
-            info: generateProductsErrorInfo(product),
-          });
-        }
+        cart.products.push({ pid, quantity });
+        await this.cartDAO.updateCartById(cartId, cart);
       }
       await this.cartDAO.updateCartById(cartId, cart);
       await this.productDAO.updateProduct(pid, product);
@@ -162,7 +143,6 @@ export default class CartRepository {
       );
       if (productValidate) {
         productValidate.quantity -= 1;
-        product.stock += 1;
         if (productValidate.quantity == 0) {
           cart = await this.clearCart(
             userBD.cartId[0]._id,
@@ -171,7 +151,6 @@ export default class CartRepository {
           await this.cartDAO.updateCartById(userBD.cartId[0]._id, cart);
         }
         await this.cartDAO.updateCartById(userBD.cartId[0]._id, cart);
-        await this.productDAO.updateProduct(pid, product);
         return cart;
       }
       return null;
@@ -233,27 +212,75 @@ export default class CartRepository {
   }
 
   async getTicketCartUserById(user) {
-    const { cart, total } = await this.getCartUserById(user);
-    if (cart.products.length !== 0) {
-      const products = { products: [] };
-      await this.cartDAO.updateCartById(cart._id, products);
-      const ticket = {
-        code: v4(),
-        purchase_datetime: new moment()
-          .format("YYYY-MM-DD HH:mm:ss")
-          .toString(),
-        amount: total,
-        purcharser: user.email,
-      };
-      await this.ticketDAO.addTicket(ticket);
-      return ticket;
-    } else {
-      CustomError.createError({
-        name: "Error",
-        message: "Cart not products",
-        code: EErrors.NOT_PRODUCTS_TICKET,
-        info: generateTicketErrorInfo(),
-      });
+    try {
+      let { cart, total } = await this.getCartUserById(user);
+
+      if (cart.products.length !== 0) {
+        for (const p of cart.products) {
+          try {
+            const product = await this.productDAO.getProductById(
+              p.pid._id.toString()
+            );
+
+            if (product.stock >= p.quantity) {
+              product.stock -= p.quantity;
+              cart = await this.clearCart(cart._id, product._id);
+              await this.cartDAO.updateCartById(cart._id, cart);
+              await this.productDAO.updateProduct(product._id, product);
+            } else if (product.stock < p.quantity) {
+              if (product.stock === 0) {
+                throw CustomError.createError({
+                  name: "Error",
+                  message: "STOCK_NOT_AVAILABLE",
+                  code: EErrors.STOCK_NOT_AVAILABLE,
+                  info: generateCartErrorInfo(cart),
+                });
+              }
+              const stock = product.stock;
+              product.stock -= stock;
+              p.quantity -= stock;
+              await this.productDAO.updateProduct(product._id, product);
+              await this.cartDAO.updateCartById(cart._id, cart);
+            } else {
+              throw CustomError.createError({
+                name: "Error",
+                message: "STOCK_NOT_AVAILABLE",
+                code: EErrors.STOCK_NOT_AVAILABLE,
+                info: generateCartErrorInfo(cart),
+              });
+            }
+          } catch (e) {
+            // Manejo de errores específicos para cada iteración
+            throw CustomError.createError({
+              name: "Error",
+              message: "STOCK_NOT_AVAILABLE",
+              code: EErrors.STOCK_NOT_AVAILABLE,
+              info: generateCartErrorInfo(cart),
+            });
+          }
+        }
+
+        const ticket = {
+          code: v4(),
+          purchase_datetime: moment().format("YYYY-MM-DD HH:mm:ss"),
+          amount: total,
+          purcharser: user.email,
+        };
+
+        await this.ticketDAO.addTicket(ticket);
+
+        return ticket;
+      } else {
+        // Handle case where cart has no products
+        CustomError.createError({
+          name: "Error",
+          message: "Cart not products",
+          code: EErrors.NOT_PRODUCTS_TICKET,
+          info: generateTicketErrorInfo(),
+        });
+      }
+    } catch (e) {
+      throw e;
     }
   }
 }

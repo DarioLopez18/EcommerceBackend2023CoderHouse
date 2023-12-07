@@ -81,7 +81,7 @@ export default class UserRepository {
     }
   };
 
-  userPremium = async(id)=>{
+  userPremium = async (id) => {
     try {
       const user = await this.userDAO.getUserById(id);
       if (user) {
@@ -113,5 +113,5 @@ export default class UserRepository {
       req.logger.fatal("Error al cambiar a usuario premium");
       res.status(500).json({ error: error.message });
     }
-  }
+  };
 }

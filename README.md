@@ -54,6 +54,7 @@ A la fecha: 06-12-2023 no se ha terminado de desarrollar por completo, pero sema
 * API para los tickets de una compra 
 * Reestablecimiento de la contraseña del usuario
 * Verificación del correo del usuario a través de un mail con nodemailer
+* API para subir archivos foto de perfil - imagen del producto - documentos del usuario
 
 # Datos de interés 🏹: 
 * Persistido en una base de datos no relacional (Mongo DB)
