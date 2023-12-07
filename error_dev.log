@@ -4,3 +4,4 @@
 {"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-11-11T18:05:30.715Z"}
 {"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-11-11T18:05:35.523Z"}
 {"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-04T21:09:22.377Z"}
+{"level":"fatal","message":"Error al crear el carrito","timestamp":"2023-12-07T00:22:22.842Z"}
