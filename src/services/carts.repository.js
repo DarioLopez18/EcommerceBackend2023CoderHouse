@@ -9,6 +9,9 @@ import {
   generateTicketErrorInfo,
 } from "../errors/info.js";
 import moment from "moment";
+import fs from "fs";
+import PDFDocument from "pdfkit";
+import nodemailer from "nodemailer";
 
 export default class CartRepository {
   constructor(cartDAO, userDAO, productDAO, ticketDAO) {
@@ -210,7 +213,6 @@ export default class CartRepository {
       throw error;
     }
   }
-
   async getTicketCartUserById(user) {
     try {
       let { cart, total } = await this.getCartUserById(user);
@@ -268,6 +270,7 @@ export default class CartRepository {
         };
 
         await this.ticketDAO.addTicket(ticket);
+        //this.generateInvoice(user,cart,total);
 
         return ticket;
       } else {
