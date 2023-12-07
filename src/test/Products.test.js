@@ -17,43 +17,73 @@ describe("Pruebas de la API", () => {
     mongoose.disconnect();
     server.close();
   });
-  it("Debería poder crear un carrito de la ruta api/cart", async () => {
+  it("Debería poder crear un producto de la ruta /api/product", async () => {
     try {
       const token = generateToken();
+      const product = {
+        title: "Notebook",
+        descripcion: "Notebook Gamer Acer Nitro 5 15.6",
+        /*Cambiar el codigo en cada peticion */
+        code: "1432324233245678",
+        price: 465990,
+        status: true,
+        stock: 20,
+        category: "NOTEBOOK",
+        thumbail: "https://acortar.link/SLS5hS",
+        owner: "adminCoder@coder.com",
+      };
       const response = await request
-        .post("/api/cart")
+        .post("/api/products")
+        .send(product)
         .set("Cookie", `keyCookieForJWT=${token}`);
-      console.log(response.body.products);
-      expect(response.body.products).to.be.an("array").that.is.empty;
-      expect(response.status).to.equal(200);
+      const product2 = response.body;
+      expect(product2.title).to.eql(product.title);
+      expect(product2.descripcion).to.eql(product.descripcion);
+      expect(product2.stock).to.eql(product.stock);
+      expect(product2.thumbail).to.eql(product.thumbail);
+      expect(product2.owner).to.eql(product.owner);
+      expect(response.status).to.equal(201);
     } catch (e) {
       console.log(e);
     }
   }).timeout(8000);
-  it("Deberia poder devolver el carrito de un usuario pasandole el id /api/cart/user", async () => {
+  it("Debería devolver un producto por id /api/products/:pid", async () => {
     try {
       const token = generateToken();
       const response = await request
-        .get("/api/cart/6525f5c51c9f1291cae6510a")
+        .get("/api/products/64c54724e6bf28b4713ff8dd")
         .set("Cookie", `keyCookieForJWT=${token}`);
       expect(response.status).to.equal(200);
+      expect(response.body.title).to.eql("Notebook");
     } catch (e) {
       console.log(e);
     }
-  });
-  it("Le pasamos un ID que no existe y no debería de devolver un carrito /api/cart/:cid", async () => {
+  }).timeout(8000);
+  it("Debería actualizar un producto por id /api/products/:pid", async () => {
     try {
       const token = generateToken();
+      const product = {
+        title: "NotebookActualizada",
+        descripcion: "Notebook Gamer Acer Nitro 5 15.6",
+        /*Cambiar el codigo en cada peticion */
+        code: "14320",
+        price: 465990,
+        status: true,
+        stock: 20,
+        category: "NOTEBOOK",
+        thumbail: "https://acortar.link/SLS5hS",
+        owner: "adminCoder@coder.com",
+      };
       const response = await request
-        .get("/api/cart/6525f5c51c9f1291cae65109")
+        .put("/api/products/64c54724e6bf28b4713ff8dd")
+        .send(product)
         .set("Cookie", `keyCookieForJWT=${token}`);
-      expect(response.body).to.be.an("object");
-      expect(response.body).to.have.property("error").that.is.a("string");
-      expect(response.status).to.equal(500);
+      expect(response.status).to.equal(200);
+      expect(response.body.title).to.eql("NotebookActualizada");
     } catch (e) {
       console.log(e);
     }
-  });
+  }).timeout(8000);
 });
 
 async function connectDb() {
