@@ -57,4 +57,18 @@ export default class UsersMongo {
       throw e;
     }
   }
+
+  async inactiveUser() {
+    const twoDaysAgo = new Date();
+    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+    const inactiveUsers = await UserModel.find({
+      last_connection: { $lt: twoDaysAgo },
+    });
+    if (inactiveUsers.length > 0) {
+      await UserModel.deleteMany({
+        _id: { $in: inactiveUsers.map((user) => user._id) },
+      });
+    }
+    return inactiveUsers;
+  }
 }

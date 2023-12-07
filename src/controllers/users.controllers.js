@@ -54,3 +54,22 @@ export const uploadDocumentView = async (req, res) => {
     throw e;
   }
 };
+
+export const inactiveUser = async (req, res) => {
+  try {
+    const userDrop = await userRepository.inactiveUsersDrop();
+    res.status(200).send(userDrop);
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const deleteUser = await userRepository.deleteUser(uid);
+    res.status(200).send({ message: "usuario eliminado" });
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+};

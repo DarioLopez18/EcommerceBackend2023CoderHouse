@@ -5,6 +5,8 @@ import {
   uploadDocuments,
   uploadDocumentView,
   getUsers,
+  inactiveUser,
+  deleteUser
 } from "../controllers/users.controllers.js";
 import upload from "../middlewares/multer.js";
 
@@ -29,6 +31,18 @@ router.get(
   "/uploadDocuments",
   passport.authenticate("jwt", { session: false }),
   uploadDocumentView
+);
+
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  inactiveUser
+);
+
+router.get(
+  "/delete/:uid",
+  passport.authenticate("jwt", { session: false }),
+  deleteUser
 );
 
 export default router;

@@ -116,6 +116,8 @@
           <th>Email</th>
           <th>Age</th>
           <th>Role</th>
+          <th>Cambiar rol</th>
+          <th>Eliminar user</th>
         </tr>
       </thead>
       <tbody>
@@ -126,11 +128,24 @@
             <td>{{this.email}}</td>
             <td>{{this.age}}</td>
             <td>{{this.rol}}</td>
+            <td><a href="/api/users/premium/{{this._id}}">Cambiar rol</a></td>
+            <td><a href="/api/users/delete/{{this._id}}">Eliminar user</a></td>
           </tr>
         {{/each}}
       </tbody>
     </table>
 
+    <button class="btn btn-danger" onclick="deleteUser('{{this._id}}')">Delete
+      user last connection</button>
+
+    <script>
+      function deleteUser(userId) { console.log('Eliminar usuario con ID:',
+      userId); fetch(`/api/users/`, { method: 'DELETE', headers: {
+      'Content-Type': 'application/json', }, }) .then(response =>
+      response.json()) .then(data => { console.log('Respuesta del servidor:',
+      data); }) .catch(error => console.error('Error al eliminar usuario:',
+      error)); }
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

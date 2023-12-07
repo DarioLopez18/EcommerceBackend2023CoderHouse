@@ -2,6 +2,8 @@ import UserDTO from "../DTO/user.dto.js";
 import CustomError from "../errors/CustomError.js";
 import EErrors from "../errors/enums.js";
 import { generateUserErrorInfo } from "../errors/info.js";
+import nodemailer from "nodemailer";
+import config from "../config/config.js";
 
 export default class UserRepository {
   constructor(userDAO, cartDAO) {
@@ -98,17 +100,20 @@ export default class UserRepository {
           user.rol = "premium";
           await this.userDAO.updateUser(user._id, user);
           return user;
+        } else if (user.rol === "premium") {
+          user.rol = "user";
+          await this.userDAO.updateUser(user._id, user);
+          return user;
         } else {
-          CustomError.createError({
+          throw CustomError.createError({
             message: "You have not uploaded the complete documentation",
             code: EErrors.USER_NOT_AUTHORIZED,
             status: 401,
-            info: generateCartErrorInfo({ pid }),
+            info: generateUserErrorInfo({
+              message: "You have not uploaded the complete documentation",
+            }),
           });
         }
-        user.rol = "user";
-        await this.userDAO.updateUser(user._id, user);
-        return user;
       } else {
         CustomError.createError({
           message: "User not found",
@@ -126,6 +131,42 @@ export default class UserRepository {
           message: "You have not uploaded the complete documentation",
         }),
       });
+    }
+  };
+
+  inactiveUsersDrop = async () => {
+    try {
+      const inactiveUser = await this.userDAO.inactiveUser();
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: config.USER,
+          pass: config.PASS,
+        },
+      });
+
+      if (inactiveUser.length > 0) {
+        inactiveUser.forEach(async (user) => {
+          const mailOptions = {
+            to: user.email,
+            subject: "Cuenta eliminada por inactividad",
+            text: "Tu cuenta ha sido eliminada debido a inactividad. Puedes registrarte nuevamente si lo deseas.",
+          };
+          await transporter.sendMail(mailOptions);
+          return { message: "success" };
+        });
+      } else {
+        throw CustomError.createError({
+          message: "there are no users to delete",
+          code: EErrors.USER_NOT_AUTHORIZED,
+          status: 401,
+          info: generateUserErrorInfo({
+            message: "there are no users to delete",
+          }),
+        });
+      }
+    } catch (e) {
+      throw e;
     }
   };
 }

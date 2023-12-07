@@ -65,7 +65,7 @@ export const getProductsRealTime = async (req, res) => {
       products = await productRepository.getProducts();
     }
     const category = await categoryRepository.getCategorys();
-    if (user.rol === "admin") {
+    if (user.rol === "admin" || user.rol === "premium") {
       const productsPrev = products.productsPrev;
       const productsNext = products.productsNext;
       const productsPrevValidate = products.paginaAnterior;

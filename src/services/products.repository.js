@@ -2,6 +2,8 @@ import ProductDTO from "../DTO/products.dto.js";
 import CustomError from "../errors/CustomError.js";
 import EErrors from "../errors/enums.js";
 import { generateProductsErrorInfo } from "../errors/info.js";
+import nodemailer from "nodemailer";
+import config from "../config/config.js";
 
 export default class ProductRepository {
   constructor(productDAO, userDAO) {
@@ -73,8 +75,25 @@ export default class ProductRepository {
     try {
       const user = await this.userDAO.getUserByEmail(email);
       if (user.rol === "admin") {
+        const producto = await this.productDAO.getProductById(id);
+        if(producto.owner !== "admin"){
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: config.USER,
+              pass: config.PASS,
+            },
+          });
+          const mailOptions = {
+            to: producto.owner,
+            subject: "Tu producto ha sido eliminado por no cumplir con nuestras normas",
+            text: "Tu producto ha sido eliminado por no cumplir con nuestras normas",
+          };
+          await transporter.sendMail(mailOptions);
+        }
         const product = await this.productDAO.deleteProduct(id);
         return "product deleted";
+
       }
       const products = this.productDAO.getProductById(id);
       if (products.owner === email) {
