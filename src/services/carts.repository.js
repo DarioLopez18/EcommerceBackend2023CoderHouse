@@ -215,8 +215,7 @@ export default class CartRepository {
   }
   async getTicketCartUserById(user) {
     try {
-      let { cart, total } = await this.getCartUserById(user);
-
+      let { cart, total } = await this.getCartUserById(user.user);
       if (cart.products.length !== 0) {
         for (const p of cart.products) {
           try {
@@ -239,8 +238,10 @@ export default class CartRepository {
                 });
               }
               const stock = product.stock;
+              const dif = p.quantity - stock
               product.stock -= stock;
               p.quantity -= stock;
+              total -= dif * product.price;
               await this.productDAO.updateProduct(product._id, product);
               await this.cartDAO.updateCartById(cart._id, cart);
             } else {
@@ -266,7 +267,7 @@ export default class CartRepository {
           code: v4(),
           purchase_datetime: moment().format("YYYY-MM-DD HH:mm:ss"),
           amount: total,
-          purcharser: user.email,
+          purcharser: user.user.email,
         };
 
         await this.ticketDAO.addTicket(ticket);
