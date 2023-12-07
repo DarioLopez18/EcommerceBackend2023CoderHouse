@@ -24,7 +24,8 @@ const userModel = mongoose.model(
       default: "not verified",
     },
     verificationCode: String,
-    documents: []
+    documents: [],
+    last_connection: Date
   })
 );
 
