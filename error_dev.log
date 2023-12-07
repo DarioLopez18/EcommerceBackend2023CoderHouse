@@ -29,3 +29,6 @@
 {"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-07T02:35:09.908Z"}
 {"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T02:36:40.410Z"}
 {"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-07T02:36:41.267Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T02:41:57.380Z"}
+{"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-07T02:41:58.386Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-07T02:42:38.755Z"}

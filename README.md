@@ -2,7 +2,7 @@
 
 Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, Node.
 
-A la fecha: 18-11-2023 no se ha terminado de desarrollar por completo, pero semana a semana se van agregando nuevas funcionalidades ⚒️
+A la fecha: 06-12-2023 no se ha terminado de desarrollar por completo, pero semana a semana se van agregando nuevas funcionalidades ⚒️
 
 ![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green)
 ![GitHub Org's stars](https://img.shields.io/github/stars/CharlyMoreno/ecommerce-coder-32125)
@@ -17,6 +17,17 @@ A la fecha: 18-11-2023 no se ha terminado de desarrollar por completo, pero sema
     align="center"
 />
 </p>
+
+# Acerca de como ejecutar la aplicación: 
+
+* Clonar el repositorio
+* Solicitar las credenciales (archivo .env) y colocarlo en el directorio principal
+* Instalar las dependencias con el comando-> npm i
+* Para correr el servidor hacer uso del comando-> npm start
+* Para correr los test de Session hacer uso del comando-> npm run testSession
+* Para correr los test de Products hacer uso del comando-> npm run testProducts
+* Para correr los test de Carts hacer uso del comando-> npm run testCarts
+
 
 # Información sobre la aplicación 📜:
 
