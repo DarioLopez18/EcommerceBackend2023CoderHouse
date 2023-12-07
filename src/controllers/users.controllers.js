@@ -1,5 +1,20 @@
 import { userRepository } from "../services/index.js";
 
+export const getUsers = async (req, res) => {
+  try {
+    const { user } = req.user;
+    if (user.rol === "admin") {
+      const users = await userRepository.getUsers();
+      res.render("users", { users });
+    } else {
+      res.status(403).json({ message: "not authorized" });
+    }
+  } catch (error) {
+    req.logger.fatal("Error al obtener los usuarios");
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const userPremium = async (req, res) => {
   try {
     const id = req.params.uid;
@@ -21,10 +36,10 @@ export const uploadDocuments = async (req, res) => {
     req.files.forEach((file) => {
       user.documents.push({
         name: file.originalname,
-        reference: file.path, 
+        reference: file.path,
       });
     });
-    await userRepository.updateUser(user._id,user);
+    await userRepository.updateUser(user._id, user);
     res.status(200).json({ message: "Documents uploaded successfully", user });
   } catch (error) {
     console.error(error);
@@ -32,10 +47,10 @@ export const uploadDocuments = async (req, res) => {
   }
 };
 
-export const uploadDocumentView = async(req,res)=>{
-  try{
-    res.status(200).render("uploadDocuments")
-  }catch(e){
+export const uploadDocumentView = async (req, res) => {
+  try {
+    res.status(200).render("uploadDocuments");
+  } catch (e) {
     throw e;
   }
-}
+};

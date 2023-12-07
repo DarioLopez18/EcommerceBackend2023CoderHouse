@@ -2,8 +2,6 @@
 
 Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, Node.
 
-A la fecha: 06-12-2023 no se ha terminado de desarrollar por completo, pero semana a semana se van agregando nuevas funcionalidades ⚒️
-
 ![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green)
 ![GitHub Org's stars](https://img.shields.io/github/stars/CharlyMoreno/ecommerce-coder-32125)
 
@@ -54,7 +52,7 @@ A la fecha: 06-12-2023 no se ha terminado de desarrollar por completo, pero sema
 * API para los tickets de una compra 
 * Reestablecimiento de la contraseña del usuario
 * Verificación del correo del usuario a través de un mail con nodemailer
-* API para subir archivos foto de perfil - imagen del producto - documentos del usuario
+* API para subir archivos foto de perfil - imagen del producto - documentos del usuario (con multer)
 
 # Datos de interés 🏹: 
 * Persistido en una base de datos no relacional (Mongo DB)

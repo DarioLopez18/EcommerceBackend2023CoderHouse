@@ -5,6 +5,5 @@ export default class userDTO {
     this.email = user.email;
     this.age = user.age;
     this.rol = user.rol;
-    this._id = user._id;
   }
 }

@@ -3,7 +3,8 @@ import passport from "passport";
 import {
   userPremium,
   uploadDocuments,
-  uploadDocumentView
+  uploadDocumentView,
+  getUsers,
 } from "../controllers/users.controllers.js";
 import upload from "../middlewares/multer.js";
 
@@ -22,6 +23,12 @@ router.post(
   uploadDocuments
 );
 
-router.get("/uploadDocuments",passport.authenticate("jwt", { session: false }),uploadDocumentView)
+router.get("/", passport.authenticate("jwt", { session: false }), getUsers);
+
+router.get(
+  "/uploadDocuments",
+  passport.authenticate("jwt", { session: false }),
+  uploadDocumentView
+);
 
 export default router;

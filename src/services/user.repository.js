@@ -27,7 +27,7 @@ export default class UserRepository {
   async getUsers() {
     try {
       const users = await this.userDAO.getUsers();
-      return users.map((user) => new UserDTO(user));
+      return users;
     } catch (error) {
       throw error;
     }
@@ -122,7 +122,9 @@ export default class UserRepository {
         message: "You have not uploaded the complete documentation",
         code: EErrors.USER_NOT_AUTHORIZED,
         status: 401,
-        info: generateUserErrorInfo({message:"You have not uploaded the complete documentation"}),
+        info: generateUserErrorInfo({
+          message: "You have not uploaded the complete documentation",
+        }),
       });
     }
   };

@@ -75,9 +75,10 @@ const runServer = () => {
     console.log("Client connected succesly");
     socket.on(
       "new-product",
-      passport.authenticate("jwt", { session: false }),
+      //passport.authenticate("jwt", { session: false }),
       async (data) => {
         try {
+          console.log(data)
           await productRepository.addProduct(data);
           const products = await productRepository.getProducts();
           io.emit("reload-table", products);
