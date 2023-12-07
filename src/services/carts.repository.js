@@ -12,6 +12,8 @@ import moment from "moment";
 import fs from "fs";
 import PDFDocument from "pdfkit";
 import nodemailer from "nodemailer";
+import puppeteer from "puppeteer";
+import config from "../config/config.js";
 
 export default class CartRepository {
   constructor(cartDAO, userDAO, productDAO, ticketDAO) {
@@ -213,6 +215,7 @@ export default class CartRepository {
       throw error;
     }
   }
+
   async getTicketCartUserById(user) {
     try {
       let { cart, total } = await this.getCartUserById(user.user);
@@ -222,7 +225,6 @@ export default class CartRepository {
             const product = await this.productDAO.getProductById(
               p.pid._id.toString()
             );
-
             if (product.stock >= p.quantity) {
               product.stock -= p.quantity;
               cart = await this.clearCart(cart._id, product._id);
@@ -238,7 +240,7 @@ export default class CartRepository {
                 });
               }
               const stock = product.stock;
-              const dif = p.quantity - stock
+              const dif = p.quantity - stock;
               product.stock -= stock;
               p.quantity -= stock;
               total -= dif * product.price;
@@ -269,9 +271,7 @@ export default class CartRepository {
           amount: total,
           purcharser: user.user.email,
         };
-
         await this.ticketDAO.addTicket(ticket);
-        //this.generateInvoice(user,cart,total);
 
         return ticket;
       } else {
