@@ -13,9 +13,9 @@ const validarUser = async (user, profile) => {
   if (user) {
     const token = generateToken(user);
     user.token = token;
-    const date = new Date()
+    const date = new Date();
     user.last_connection = date;
-    await userRepository.updateUser(user._id,user)
+    await userRepository.updateUser(user._id, user);
     return user;
   }
   const date = new Date();
@@ -27,10 +27,11 @@ const validarUser = async (user, profile) => {
     password: "",
     cartId: [],
     rol: "user",
-    status:"verified",
+    status: "verified",
     verificationCode: "true",
     documents: [],
-    last_connection: date
+    last_connection: date,
+    ticketId: [],
   };
   const result = await userRepository.createUser(newUser);
   const token = generateToken(result);

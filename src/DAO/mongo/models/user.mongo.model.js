@@ -34,6 +34,11 @@ const userModel = mongoose.model(
       type: Date,
       default: null,
     },
+    ticketId: [
+      {
+        tic: {type: mongoose.Schema.Types.ObjectId,ref: "tickets"}
+      }
+    ],
   })
 );
 

@@ -231,14 +231,6 @@ export default class CartRepository {
               await this.cartDAO.updateCartById(cart._id, cart);
               await this.productDAO.updateProduct(product._id, product);
             } else if (product.stock < p.quantity) {
-              if (product.stock === 0) {
-                throw CustomError.createError({
-                  name: "Error",
-                  message: "STOCK_NOT_AVAILABLE",
-                  code: EErrors.STOCK_NOT_AVAILABLE,
-                  info: generateCartErrorInfo(cart),
-                });
-              }
               const stock = product.stock;
               const dif = p.quantity - stock;
               product.stock -= stock;
@@ -246,13 +238,6 @@ export default class CartRepository {
               total -= dif * product.price;
               await this.productDAO.updateProduct(product._id, product);
               await this.cartDAO.updateCartById(cart._id, cart);
-            } else {
-              throw CustomError.createError({
-                name: "Error",
-                message: "STOCK_NOT_AVAILABLE",
-                code: EErrors.STOCK_NOT_AVAILABLE,
-                info: generateCartErrorInfo(cart),
-              });
             }
           } catch (e) {
             // Manejo de errores específicos para cada iteración
