@@ -84,8 +84,6 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
 * ![Git](https://img.shields.io/badge/-Git-222222?style=flat&logo=git&logoColor=F05032)
 * ![MongoDB](https://img.shields.io/badge/-MongoDB-222222?style=flat&logo=MongoDB)
 * ![Handlebars](https://img.shields.io/badge/-Handlebars-222222?style=flat&logo=Hbs)
-
-<p align="right">(<a href="#top">Volver Arriba</a>)</p>
 * ![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 * ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 * ![HTML5](	https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -93,3 +91,6 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
 * ![BOOTSTRAP!](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 * ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 * ![PRETTIER](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+
+<p align="right">(<a href="#top">Volver Arriba</a>)</p>
+
