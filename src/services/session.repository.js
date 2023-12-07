@@ -46,6 +46,9 @@ export default class SessionRepository {
           info: generateUserErrorInfo(user),
         });
       }
+      const date = new Date();
+      userDB.last_connection = date;
+      await this.userDAO.updateUser(userDB._id, userDB);
       return new UserDTO(userDB);
     } catch (e) {
       throw e;
@@ -151,5 +154,12 @@ export default class SessionRepository {
     } catch (e) {
       throw e;
     }
+  }
+  async setDateController(user) {
+    const userDB = await this.userDAO.getUserByEmail(user.email);
+    const date = new Date();
+    userDB.last_connection = date;
+    await this.userDAO.updateUser(userDB._id, userDB);
+    return userDB;
   }
 }

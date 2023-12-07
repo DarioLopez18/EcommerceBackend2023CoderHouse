@@ -36,3 +36,14 @@
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-07T06:56:24.581Z"}
 {"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T06:57:31.583Z"}
 {"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-07T06:57:32.447Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T07:26:16.447Z"}
+{"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-07T07:26:35.744Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T07:28:49.184Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T07:31:29.275Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T07:31:57.705Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-07T07:33:54.554Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-07T07:34:18.335Z"}
+{"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-07T07:34:21.442Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-07T07:34:24.322Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-07T07:34:51.608Z"}
+{"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-07T07:36:12.431Z"}

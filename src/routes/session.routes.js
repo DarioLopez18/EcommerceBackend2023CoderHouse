@@ -9,6 +9,7 @@ import {
   restart,
   validPassword,
   getProfile,
+  logoutUser
 } from "../controllers/session.controllers.js";
 import passport from "passport";
 const router = Router();
@@ -24,10 +25,7 @@ router.get("/login", (req, res) => {
 
 router.get(
   "/logout",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.clearCookie("keyCookieForJWT").redirect("/api/session/login");
-  }
+  passport.authenticate("jwt", { session: false }),logoutUser
 );
 
 router.get(

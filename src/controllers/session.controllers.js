@@ -114,3 +114,9 @@ export const getProfile = async (req, res) => {
   const userDB = await sessionRepository.getUserByEmail(user.email);
   res.status(200).render("profile", userDB);
 };
+
+export const logoutUser = async (req, res) => {
+  const {user} = req.user;
+  await sessionRepository.setDateController(user);
+  res.clearCookie("keyCookieForJWT").redirect("/api/session/login");
+};
