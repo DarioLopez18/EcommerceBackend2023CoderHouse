@@ -21,7 +21,8 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
 * Clonar el repositorio
 * Solicitar las credenciales (archivo .env) y colocarlo en el directorio principal
 * Instalar las dependencias con el comando-> npm i
-* Para correr el servidor hacer uso del comando-> npm start
+* Para correr la aplicación en producción hacer uso del comando-> npm start
+* Para correr la aplicación en desarrollo hacer uso del comando-> npm run dev
 * Para correr los test de Session hacer uso del comando-> npm run testSession
 * Para correr los test de Products hacer uso del comando-> npm run testProducts
 * Para correr los test de Carts hacer uso del comando-> npm run testCarts
