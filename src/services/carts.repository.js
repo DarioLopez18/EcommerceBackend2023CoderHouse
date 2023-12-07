@@ -256,7 +256,10 @@ export default class CartRepository {
           amount: total,
           purcharser: user.user.email,
         };
-        await this.ticketDAO.addTicket(ticket);
+        const ticketCreate = await this.ticketDAO.addTicket(ticket);
+        user.user.ticketId.push(ticketCreate._id)
+        console.log(user.user)
+        await this.userDAO.updateUser(user.user._id, user.user);
 
         return ticket;
       } else {
