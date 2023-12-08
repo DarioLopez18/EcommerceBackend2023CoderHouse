@@ -20,6 +20,12 @@ const ticketSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  products: [
+    {
+      pid: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
+      quantity: Number,
+    },
+  ],
 });
 
 const ticketCollection = "tickets";

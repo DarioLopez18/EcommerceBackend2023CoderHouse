@@ -219,6 +219,7 @@ export default class CartRepository {
   async getTicketCartUserById(user) {
     try {
       let { cart, total } = await this.getCartUserById(user.user);
+      let products = [];
       if (cart.products.length !== 0) {
         for (const p of cart.products) {
           try {
@@ -228,6 +229,9 @@ export default class CartRepository {
             if (product.stock >= p.quantity) {
               product.stock -= p.quantity;
               cart = await this.clearCart(cart._id, product._id);
+              const pid = product._id;
+              const quantity = p.quantity;
+              products.push({ pid, quantity });
               await this.cartDAO.updateCartById(cart._id, cart);
               await this.productDAO.updateProduct(product._id, product);
             } else if (product.stock < p.quantity) {
@@ -255,10 +259,10 @@ export default class CartRepository {
           purchase_datetime: moment().format("YYYY-MM-DD HH:mm:ss"),
           amount: total,
           purcharser: user.user.email,
+          products: products,
         };
         const ticketCreate = await this.ticketDAO.addTicket(ticket);
-        user.user.ticketId.push(ticketCreate._id)
-        console.log(user.user)
+        user.user.ticketId.push(ticketCreate._id);
         await this.userDAO.updateUser(user.user._id, user.user);
 
         return ticket;
