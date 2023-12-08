@@ -58,6 +58,7 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
 * Reestablecimiento de la contraseña del usuario
 * Verificación del correo del usuario a través de un mail con nodemailer
 * API para subir archivos foto de perfil - imagen del producto - documentos del usuario (con multer)
+* API para la pasarela de pago con stripe
 
 # Datos de interés 🏹: 
 * Persistido en una base de datos no relacional (Mongo DB)
