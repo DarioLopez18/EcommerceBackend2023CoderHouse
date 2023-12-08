@@ -14,6 +14,7 @@ import CartRepository from "./carts.repository.js";
 import UserRepository from "./user.repository.js";
 import SessionRepository from "./session.repository.js";
 import TicketRepository from "./ticket.repository.js";
+import PaymentService from "./payment.service.js";
 
 export const productRepository = new ProductRepository(
   new Product(),
@@ -30,3 +31,4 @@ export const cartRepository = new CartRepository(
 export const userRepository = new UserRepository(new User(), new Cart());
 export const sessionRepository = new SessionRepository(new User());
 export const ticketRepository = new TicketRepository(new Ticket());
+export const paymentService = new PaymentService();
