@@ -19,29 +19,36 @@ export default class PaymentService {
   }
 
   async creacteCheckout(id) {
-    const ticket = await this.ticketDAO.getTicketById(id);
-    const products = ticket.products;
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: products.map((product) => ({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: product.pid.title,
+    try {
+      const ticket = await this.ticketDAO.getTicketById(id);
+      const products = ticket.products;
+      if (ticket.status === "confirmate") {
+        throw new Error("ya ha sido pagado el ticket");
+      }
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: products.map((product) => ({
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: product.pid.title,
+            },
+            unit_amount: product.pid.price * 100,
           },
-          unit_amount: product.pid.price * 100,
-        },
-        quantity: product.quantity,
-      })),
-      mode: "payment",
-      success_url: `http://localhost:8080/api/payment/sucess?ticketId=${encodeURIComponent(
-        ticket._id
-      )}`,
-      cancel_url: `http://localhost:8080/api/payment/cancel?ticketId=${encodeURIComponent(
-        ticket._id
-      )}`,
-    });
-    return session;
+          quantity: product.quantity,
+        })),
+        mode: "payment",
+        success_url: `http://localhost:8080/api/payment/sucess?ticketId=${encodeURIComponent(
+          ticket._id
+        )}`,
+        cancel_url: `http://localhost:8080/api/payment/cancel?ticketId=${encodeURIComponent(
+          ticket._id
+        )}`,
+      });
+      return session;
+    } catch (e) {
+      throw e;
+    }
   }
   async sucessPayment(ticketId) {
     const ticket = await this.ticketDAO.getTicketById(ticketId);

@@ -7,7 +7,7 @@ export const creacteCheckout = async (req, res) => {
     const session = await paymentService.creacteCheckout(ticketId);
     return res.redirect(session.url);
   } catch (e) {
-    console.log(e);
+    return res.send({error:"error",message:"Ya ha sido pagado el ticket"})
   }
 };
 
