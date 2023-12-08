@@ -26,6 +26,7 @@ const ticketSchema = mongoose.Schema({
       quantity: Number,
     },
   ],
+  status: String,
 });
 
 const ticketCollection = "tickets";

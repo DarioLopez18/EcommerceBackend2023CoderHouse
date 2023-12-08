@@ -263,11 +263,12 @@ export default class CartRepository {
           amount: total,
           purcharser: user.user.email,
           products: products,
+          status: "pending"
         };
         const ticketCreate = await this.ticketDAO.addTicket(ticket);
         user.user.ticketId.push(ticketCreate._id);
         await this.userDAO.updateUser(user.user._id, user.user);
-        return ticket;
+        return ticketCreate;
       } else {
         // Handle case where cart has no products
         CustomError.createError({

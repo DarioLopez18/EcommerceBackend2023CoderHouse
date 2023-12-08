@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.post("/create-checkout-session",passport.authenticate("jwt", { session: false }), creacteCheckout);
-router.get("/sucess");
+router.get("/sucess",sucessPayment);
 router.get("/cancell");
 
 export default router;

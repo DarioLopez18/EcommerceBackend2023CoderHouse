@@ -11,4 +11,12 @@ export default class TicketRepository {
       throw error;
     }
   }
+  async getTicket(id) {
+    try {
+      const ticket = await this.ticketDao.getTicketById(id);
+      return ticket;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
