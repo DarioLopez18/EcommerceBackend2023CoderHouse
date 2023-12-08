@@ -23,6 +23,7 @@ import sessionRoutes from "./routes/session.routes.js";
 import { messageRepository } from "./services/index.js";
 import { productRepository } from "./services/index.js";
 import userRoutes from "./routes/user.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
 
 /*-----Configure the server-----*/
 const PORT = config.port;
@@ -64,6 +65,7 @@ app.use("/api/session", sessionRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+app.use("/api/payment",paymentRoutes);
 
 const runServer = () => {
   const httpServer = app.listen(
@@ -78,7 +80,7 @@ const runServer = () => {
       //passport.authenticate("jwt", { session: false }),
       async (data) => {
         try {
-          console.log(data)
+          console.log(data);
           await productRepository.addProduct(data);
           const products = await productRepository.getProducts();
           io.emit("reload-table", products);
