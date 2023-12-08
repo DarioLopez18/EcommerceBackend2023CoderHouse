@@ -18,5 +18,5 @@ export default {
   USER: process.env.USER,
   PASS: process.env.PASS,
   environment: process.env.environment,
-  keyPrivate: process.env.privateKey,
+  keyPrivate: process.env.keyPrivate,
 };
