@@ -18,7 +18,11 @@ export default class TicketsMongo {
   async getTicketById(id) {
     try {
       if (id) {
-        return await ticketModel.findById(id).lean().exec();
+        return await ticketModel
+          .findById(id)
+          .populate("products.pid")
+          .lean()
+          .exec();
       }
     } catch (error) {
       throw error;

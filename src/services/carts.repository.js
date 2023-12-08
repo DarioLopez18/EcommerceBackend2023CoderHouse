@@ -240,6 +240,9 @@ export default class CartRepository {
               product.stock -= stock;
               p.quantity -= stock;
               total -= dif * product.price;
+              const pid = product._id;
+              const quantity = stock;
+              products.push({ pid, quantity });
               await this.productDAO.updateProduct(product._id, product);
               await this.cartDAO.updateCartById(cart._id, cart);
             }
@@ -264,7 +267,6 @@ export default class CartRepository {
         const ticketCreate = await this.ticketDAO.addTicket(ticket);
         user.user.ticketId.push(ticketCreate._id);
         await this.userDAO.updateUser(user.user._id, user.user);
-
         return ticket;
       } else {
         // Handle case where cart has no products
