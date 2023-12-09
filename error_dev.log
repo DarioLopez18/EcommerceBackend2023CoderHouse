@@ -165,3 +165,4 @@
 {"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-09T16:14:02.312Z"}
 {"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-09T16:14:03.684Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-09T16:18:28.601Z"}
+{"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-09T16:28:15.679Z"}
