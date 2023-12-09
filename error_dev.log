@@ -138,3 +138,6 @@
 {"level":"fatal","message":"Error al cambiar a usuario premium","timestamp":"2023-12-07T22:34:06.747Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-08T20:11:24.536Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-08T22:52:29.748Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-09T00:03:34.434Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-09T00:03:39.915Z"}
+{"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-09T00:17:57.664Z"}

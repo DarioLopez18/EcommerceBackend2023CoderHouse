@@ -10,6 +10,6 @@ const router = Router();
 
 router.post("/create-checkout-session",passport.authenticate("jwt", { session: false }), creacteCheckout);
 router.get("/sucess",sucessPayment);
-router.get("/cancell");
+router.get("/cancel",CancellPayment);
 
 export default router;

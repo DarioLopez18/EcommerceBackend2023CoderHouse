@@ -41,7 +41,7 @@ export default class CartRepository {
   async updateCartById(id, data) {
     try {
       const cart = await this.cartDAO.updateCartById(id, data);
-      return cart();
+      return cart;
     } catch (error) {
       throw error;
     }

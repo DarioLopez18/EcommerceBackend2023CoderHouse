@@ -1,4 +1,10 @@
-import { paymentService, ticketRepository } from "../services/index.js";
+import {
+  paymentService,
+  ticketRepository,
+  cartRepository,
+  userRepository,
+  productRepository,
+} from "../services/index.js";
 import Stripe from "stripe";
 import config from "../config/config.js";
 import nodemailer from "nodemailer";
@@ -14,8 +20,9 @@ const transporter = nodemailer.createTransport({
 });
 
 export default class PaymentService {
-  constructor(ticketDAO) {
+  constructor(ticketDAO, cartDAO) {
     this.ticketDAO = ticketDAO;
+    this.cartDAO = cartDAO;
   }
 
   async creacteCheckout(id) {
@@ -70,5 +77,22 @@ export default class PaymentService {
       }`,
     });
     return ticket;
+  }
+
+  async cancellPayment(ticketId) {
+    const ticket = await this.ticketDAO.getTicketById(ticketId);
+    const user = await userRepository.getUserByEmail(ticket.purcharser);
+    const cartUser = await cartRepository.getCartUserById(user);
+    for (const product of ticket.products) {
+      const pid = product.pid._id;
+      const productDB = await productRepository.getProductById(pid);
+      const quantity = product.quantity;
+      productDB.stock += quantity;
+      await productRepository.updateProduct(pid, productDB);
+      cartUser.cart.products.push({ pid, quantity });
+      const cid = cartUser.cart._id;
+      const cart = cartUser.cart;
+      await cartRepository.updateCartById(cid, cart);
+    }
   }
 }
