@@ -94,5 +94,7 @@ export default class PaymentService {
       const cart = cartUser.cart;
       await cartRepository.updateCartById(cid, cart);
     }
+    ticket.status = "canceled";
+    await this.ticketDAO.updateTicket(ticket._id, ticket);
   }
 }

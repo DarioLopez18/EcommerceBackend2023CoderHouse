@@ -6,7 +6,8 @@ import {
   uploadDocumentView,
   getUsers,
   inactiveUser,
-  deleteUser
+  deleteUser,
+  getTicketUser
 } from "../controllers/users.controllers.js";
 import upload from "../middlewares/multer.js";
 
@@ -17,6 +18,8 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   userPremium
 );
+
+router.get("/ticket/:uid",passport.authenticate("jwt", { session: false }),getTicketUser)
 
 router.post(
   "/api/users/:uid/documents",

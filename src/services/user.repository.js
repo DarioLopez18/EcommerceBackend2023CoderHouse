@@ -6,9 +6,10 @@ import nodemailer from "nodemailer";
 import config from "../config/config.js";
 
 export default class UserRepository {
-  constructor(userDAO, cartDAO) {
+  constructor(userDAO, cartDAO, ticketDAO) {
     this.userDAO = userDAO;
     this.cartDAO = cartDAO;
+    this.ticketDAO = ticketDAO;
   }
   async createUser(data) {
     try {
@@ -165,6 +166,22 @@ export default class UserRepository {
           }),
         });
       }
+    } catch (e) {
+      throw e;
+    }
+  };
+  getTicketUserById = async (userID) => {
+    try {
+      const user = await this.userDAO.getUserById(userID);
+      let tickets = [];
+      for (const ticketId of user.ticketId) {
+        const ticket = await this.ticketDAO.getTicketById(ticketId._id);
+        if (ticket.status === "confirmate") {
+          tickets.push(ticket);
+        }
+      }
+      if (tickets.length > 0) return tickets;
+      throw e;
     } catch (e) {
       throw e;
     }

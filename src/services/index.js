@@ -28,7 +28,11 @@ export const cartRepository = new CartRepository(
   new Product(),
   new Ticket()
 );
-export const userRepository = new UserRepository(new User(), new Cart());
+export const userRepository = new UserRepository(
+  new User(),
+  new Cart(),
+  new Ticket()
+);
 export const sessionRepository = new SessionRepository(new User());
 export const ticketRepository = new TicketRepository(new Ticket());
-export const paymentService = new PaymentService(new Ticket(),new Cart());
+export const paymentService = new PaymentService(new Ticket(), new Cart());

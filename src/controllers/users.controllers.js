@@ -15,6 +15,18 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const getTicketUser = async (req, res) => {
+  try {
+    const id = req.params.uid;
+    const tickets = await userRepository.getTicketUserById(id);
+    res.render("tickets", {tickets});
+  } catch (e) {
+    res
+      .status(500)
+      .send({ error: "usted no posee tickets, compre para poder verlos." });
+  }
+};
+
 export const userPremium = async (req, res) => {
   try {
     const id = req.params.uid;
