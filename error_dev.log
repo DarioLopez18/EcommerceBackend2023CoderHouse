@@ -170,3 +170,6 @@
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-09T17:11:34.908Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-09T17:11:46.302Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-09T17:12:19.441Z"}
+{"level":"fatal","message":"Error al cambiar a usuario premium","timestamp":"2023-12-10T23:15:04.507Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-10T23:44:52.279Z"}
+{"level":"fatal","message":"Error al cambiar a usuario premium","timestamp":"2023-12-10T23:47:57.277Z"}

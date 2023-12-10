@@ -1,59 +1,188 @@
-<!-- views/uploadDocuments.html -->
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-primary"
+  style="padding: 10px 20px;"
+>
+  <div class="container-fluid">
+    <a href="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="2em"
+        viewBox="0 0 576 512"
+      >
+        <!-- Tu logotipo o icono aquí -->
+      </svg>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 512 512"
+            >
+              <!-- Icono y texto de Menage -->
+            </svg>
+            <p>Home</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./realTimeProducts">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 512 512"
+            >
+              <!-- Icono y texto de Menage -->
+            </svg>
+            <p>Manage</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/api/cart/user">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 576 512"
+            >
+              <!-- Icono y texto de Cart -->
+            </svg>
+            <p>Cart</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/api/chat">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 512 512"
+            >
+              <!-- Icono y texto de Support -->
+            </svg>
+            <p>Support</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/api/products/products">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 576 512"
+            >
+              <!-- Icono y texto de Cart -->
+            </svg>
+            <p>Products</p>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="/profile">
+            <div
+              style="display: flex; justify-content:space-evenly;align-items:center;"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="2rem"
+                viewBox="0 0 448 512"
+              >
+                <!-- Icono de perfil -->
+              </svg>
+            </div>
+            <p style="font-size: 2.1rem;color:white;margin-right:10px;">
+              {{first_name}}
+              {{last_name}}
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/api/session/logout" style="margin-left:1rem;color: white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="2rem"
+              viewBox="0 0 512 512"
+            >
+              <!-- Icono y texto de Logout -->
+            </svg>
+            <p>Logout</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4">
+  <h2>Subir Archivos</h2>
+  <form
+    action="/api/users/{{uid}}/documents"
+    method="post"
+    enctype="multipart/form-data"
+  >
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Upload Documents</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-TM6c5cK8C1c3g8JdKt5H1Aiz5XsMpg3zY4h3S7eLBU4z/CXjq+qBUynd6cqzV"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body class="container mt-5">
-    <h1 class="mb-4">Upload Documents</h1>
-    <form id="uploadForm" enctype="multipart/form-data" style="max-width: 50%;margin:0 auto;">
-      <div class="form-group">
-        <label for="document" style="margin-bottom: 2rem;">Select Document(s):</label>
-        <input
-          type="file"
-          class="form-control-file"
-          name="document"
-          id="document"
-          multiple
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+    <div class="form-group">
+      <label for="profileImage">Imagen de Perfil: </label>
+      <input
+        type="file"
+        class="form-control-file"
+        name="profileImage"
+        id="profileImage"
+        accept=".jpg,.jpge"
+      />
+    </div>
 
-    <script>
-      document.getElementById('uploadForm').addEventListener('submit', function
-      (event) { event.preventDefault(); const formData = new FormData(this);
-      fetch('/api/users/:uid/documents', { method: 'POST', body: formData, })
-      .then(response => response.json()) .then(data => { console.log('Documents
-      uploaded successfully:', data); // Puedes redirigir o mostrar un mensaje
-      de éxito al usuario }) .catch(error => { console.error('Error uploading
-      documents:', error); // Puedes mostrar un mensaje de error al usuario });
-      });
-    </script>
+    <div class="form-group">
+      <label for="documentDNI">Documento Nacional de identidad:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        name="documentDNI"
+        id="documentDNI"
+        accept=".pdf, .doc, .docx, .jpg, ,jpge"
+      />
+    </div>
 
-    <!-- Agrega el script de Bootstrap JavaScript -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-      integrity="sha384-LzQeNl0fx3jtMFXtJsGdhdej1sAIVgmUxFbAfERiHQ8Z9XSOp6LqDrK//f95gP1I"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-NBXUoDcYVViNBHxhEIaZcL4PwDf9Npb6TsiBYb7CCtV+g4+Cv2tweF5TBDHjqzuO"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    <div class="form-group">
+      <label for="comprobanteDomicilio">Comprobante domicilio:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        name="comprobanteDomicilio"
+        id="comprobanteDomicilio"
+        accept=".pdf, .doc, .docx,.jpg, ,jpge"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="comprobanteEstadoCuenta">Comprobante Estado cuenta:</label>
+      <input
+        type="file"
+        class="form-control-file"
+        name="comprobanteEstadoCuenta"
+        id="comprobanteEstadoCuenta"
+        accept=".pdf, .doc, .docx,.jpg, ,jpge"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="max-width:50%">Subir
+      Archivos</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"
+></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+></script>

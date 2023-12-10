@@ -1,3 +1,4 @@
+import { use } from "chai";
 import { userRepository } from "../services/index.js";
 
 export const getUsers = async (req, res) => {
@@ -19,7 +20,7 @@ export const getTicketUser = async (req, res) => {
   try {
     const id = req.params.uid;
     const tickets = await userRepository.getTicketUserById(id);
-    res.render("tickets", {tickets});
+    res.render("tickets", { tickets });
   } catch (e) {
     res
       .status(500)
@@ -29,9 +30,9 @@ export const getTicketUser = async (req, res) => {
 
 export const userPremium = async (req, res) => {
   try {
-    const id = req.params.uid;
-    const user = await userRepository.userPremium(id);
-    res.render("profile", user);
+    const { user } = req.user;
+    const userDB = await userRepository.userPremium(user._id);
+    res.render("profile", userDB);
   } catch (error) {
     req.logger.fatal("Error al cambiar a usuario premium");
     res.status(500).json({ error: error.message });
@@ -40,18 +41,56 @@ export const userPremium = async (req, res) => {
 
 export const uploadDocuments = async (req, res) => {
   try {
-    const { uid } = req.params;
-    const user = await userRepository.getUserById(uid);
-    if (!user) {
+    const { user } = req.user;
+    const userDB = await userRepository.getUserById(user._id);
+    if (!userDB) {
       return res.status(404).json({ error: "User not found" });
     }
-    req.files.forEach((file) => {
-      user.documents.push({
-        name: file.originalname,
-        reference: file.path,
+    const uploadedDocuments = [];
+
+    if (req.files["profileImage"]) {
+      const profileImage = req.files["profileImage"][0];
+      uploadedDocuments.push({
+        name: profileImage.originalname,
+        reference: profileImage.path,
       });
-    });
-    await userRepository.updateUser(user._id, user);
+    }
+
+    if (req.files["productImage"]) {
+      const productImage = req.files["productImage"][0];
+      uploadedDocuments.push({
+        name: productImage.originalname,
+        reference: productImage.path,
+      });
+    }
+
+    if (req.files["documentDNI"]) {
+      const documentDNI = req.files["documentDNI"][0];
+      uploadedDocuments.push({
+        name: documentDNI.originalname,
+        reference: documentDNI.path,
+      });
+    }
+
+    if (req.files["comprobanteDomicilio"]) {
+      const comprobanteDomicilio = req.files["comprobanteDomicilio"][0];
+      uploadedDocuments.push({
+        name: comprobanteDomicilio.originalname,
+        reference: comprobanteDomicilio.path,
+      });
+    }
+
+    if (req.files["comprobanteEstadoCuenta"]) {
+      const comprobanteEstadoCuenta = req.files["comprobanteEstadoCuenta"][0];
+      uploadedDocuments.push({
+        name: comprobanteEstadoCuenta.originalname,
+        reference: comprobanteEstadoCuenta.path,
+      });
+    }
+
+    userDB.documents.push(...uploadedDocuments);
+
+    await userRepository.updateUser(userDB._id, userDB);
     res.status(200).json({ message: "Documents uploaded successfully", user });
   } catch (error) {
     console.error(error);
@@ -61,7 +100,9 @@ export const uploadDocuments = async (req, res) => {
 
 export const uploadDocumentView = async (req, res) => {
   try {
-    res.status(200).render("uploadDocuments");
+    const user = await userRepository.getUserByEmail(req.user.user.email);
+    const uid = user._id;
+    res.status(200).render("uploadDocuments", { uid });
   } catch (e) {
     throw e;
   }

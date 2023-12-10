@@ -97,7 +97,7 @@ export default class UserRepository {
             info: generateCartErrorInfo({ pid }),
           });
         }
-        if (user.rol === "user" && user.documents.length >= 3) {
+        if (user.rol === "user" && user.documents.length == 4) {
           user.rol = "premium";
           await this.userDAO.updateUser(user._id, user);
           return user;

@@ -7,7 +7,7 @@ import {
   getUsers,
   inactiveUser,
   deleteUser,
-  getTicketUser
+  getTicketUser,
 } from "../controllers/users.controllers.js";
 import upload from "../middlewares/multer.js";
 
@@ -19,12 +19,22 @@ router.get(
   userPremium
 );
 
-router.get("/ticket/:uid",passport.authenticate("jwt", { session: false }),getTicketUser)
+router.get(
+  "/ticket/:uid",
+  passport.authenticate("jwt", { session: false }),
+  getTicketUser
+);
 
 router.post(
-  "/api/users/:uid/documents",
+  "/:uid/documents",
   passport.authenticate("jwt", { session: false }),
-  upload.array("document", 5),
+  upload.fields([
+    { name: "profileImage", maxCount: 1 },
+    { name: "productImage", maxCount: 1 },
+    { name: "documentDNI", maxCount: 1 },
+    { name: "comprobanteDomicilio", maxCount: 1 },
+    { name: "comprobanteEstadoCuenta", maxCount: 1 },
+  ]),
   uploadDocuments
 );
 
