@@ -9,10 +9,7 @@ import {
   generateTicketErrorInfo,
 } from "../errors/info.js";
 import moment from "moment";
-import fs from "fs";
-import PDFDocument from "pdfkit";
 import nodemailer from "nodemailer";
-import puppeteer from "puppeteer";
 import config from "../config/config.js";
 
 export default class CartRepository {
@@ -218,7 +215,8 @@ export default class CartRepository {
 
   async getTicketCartUserById(user) {
     try {
-      let { cart, total } = await this.getCartUserById(user.user);
+      const userDB = await this.userDAO.getUserById(user);
+      let { cart, total } = await this.getCartUserById(userDB);
       let products = [];
       if (cart.products.length !== 0) {
         for (const p of cart.products) {
@@ -256,18 +254,16 @@ export default class CartRepository {
             });
           }
         }
-
         const ticket = {
           code: v4(),
           purchase_datetime: moment().format("YYYY-MM-DD HH:mm:ss"),
           amount: total,
-          purcharser: user.user.email,
+          purcharser: userDB.email,
           products: products,
           status: "pending",
         };
         const ticketCreate = await this.ticketDAO.addTicket(ticket);
         const ticketId = ticketCreate._id;
-        const userDB = await this.userDAO.getUserByEmail(user.user.email);
         userDB.ticketId.push(ticketCreate._id);
         await this.userDAO.updateUser(userDB._id, userDB);
         return ticketCreate;

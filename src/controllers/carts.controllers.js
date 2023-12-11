@@ -127,7 +127,7 @@ export const updateProductCartById = async (req, res) => {
 export const getTicketCartUserById = async (req, res) => {
   try {
     const user = req.user;
-    const ticket = await cartRepository.getTicketCartUserById(user);
+    const ticket = await cartRepository.getTicketCartUserById(user.user._id);
     if (ticket) {
       res.status(200).render("ticket", ticket);
     } else {
