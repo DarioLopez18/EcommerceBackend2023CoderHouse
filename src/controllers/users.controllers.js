@@ -30,8 +30,8 @@ export const getTicketUser = async (req, res) => {
 
 export const userPremium = async (req, res) => {
   try {
-    const { user } = req.user;
-    const userDB = await userRepository.userPremium(user._id);
+    const uid = req.params.uid
+    const userDB = await userRepository.userPremium(uid);
     res.render("profile", userDB);
   } catch (error) {
     req.logger.fatal("Error al cambiar a usuario premium");
@@ -41,8 +41,8 @@ export const userPremium = async (req, res) => {
 
 export const uploadDocuments = async (req, res) => {
   try {
-    const { user } = req.user;
-    const userDB = await userRepository.getUserById(user._id);
+    const uid = req.params.uid;
+    const userDB = await userRepository.getUserById(uid);
     if (!userDB) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -91,7 +91,7 @@ export const uploadDocuments = async (req, res) => {
     userDB.documents.push(...uploadedDocuments);
 
     await userRepository.updateUser(userDB._id, userDB);
-    res.status(200).json({ message: "Documents uploaded successfully", user });
+    res.status(200).json({ message: "Documents uploaded successfully", userDB });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
