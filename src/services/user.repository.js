@@ -135,6 +135,63 @@ export default class UserRepository {
     }
   };
 
+  uploadDocuments = async(id,files)=>{
+    try{
+      const userDB = await this.userDAO.getUserById(id);
+      if (!userDB) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      const uploadedDocuments = [];
+  
+      if (files["profileImage"]) {
+        const profileImage = files["profileImage"][0];
+        uploadedDocuments.push({
+          name: profileImage.originalname,
+          reference: profileImage.path,
+        });
+      }
+  
+      if (files["productImage"]) {
+        const productImage = files["productImage"][0];
+        uploadedDocuments.push({
+          name: productImage.originalname,
+          reference: productImage.path,
+        });
+      }
+  
+      if (files["documentDNI"]) {
+        const documentDNI = files["documentDNI"][0];
+        uploadedDocuments.push({
+          name: documentDNI.originalname,
+          reference: documentDNI.path,
+        });
+      }
+  
+      if (files["comprobanteDomicilio"]) {
+        const comprobanteDomicilio = files["comprobanteDomicilio"][0];
+        uploadedDocuments.push({
+          name: comprobanteDomicilio.originalname,
+          reference: comprobanteDomicilio.path,
+        });
+      }
+  
+      if (files["comprobanteEstadoCuenta"]) {
+        const comprobanteEstadoCuenta = files["comprobanteEstadoCuenta"][0];
+        uploadedDocuments.push({
+          name: comprobanteEstadoCuenta.originalname,
+          reference: comprobanteEstadoCuenta.path,
+        });
+      }
+  
+      userDB.documents.push(...uploadedDocuments);
+  
+      await this.userDAO.updateUser(userDB._id, userDB);
+      return userDB;
+    }catch(e){
+      throw e;
+    }
+  }
+
   inactiveUsersDrop = async () => {
     try {
       const inactiveUser = await this.userDAO.inactiveUser();
