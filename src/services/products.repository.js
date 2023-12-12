@@ -76,7 +76,7 @@ export default class ProductRepository {
       const user = await this.userDAO.getUserByEmail(email);
       if (user.rol === "admin") {
         const producto = await this.productDAO.getProductById(id);
-        if(producto.owner !== "admin"){
+        if (producto.owner !== "admin") {
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -86,15 +86,14 @@ export default class ProductRepository {
           });
           const mailOptions = {
             to: producto.owner,
-            subject: "Tu producto ha sido eliminado por no cumplir con nuestras normas",
-            text: `El producto ${producto.title} ${producto.descripcion} ha sido eliminado. Contactarse con
-            el servicio tecnico.`,
+            subject:
+              "Tu producto ha sido eliminado por no cumplir con nuestras normas",
+            text: `El producto ${producto.title} ${producto.descripcion} ha sido eliminado. Contactarse con el servicio tecnico.`,
           };
           await transporter.sendMail(mailOptions);
         }
         const product = await this.productDAO.deleteProduct(id);
         return "product deleted";
-
       }
       const products = this.productDAO.getProductById(id);
       if (products.owner === email) {
