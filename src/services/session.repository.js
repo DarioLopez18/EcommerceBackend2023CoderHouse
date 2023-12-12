@@ -61,7 +61,7 @@ export default class SessionRepository {
     const token = jwt.sign({ email: user.email }, "secret", {
       expiresIn: "24h",
     });
-    const verificationLink = `http://localhost:8080/api/session/verify/${token}`;
+    const verificationLink = `${config.session}/verify/${token}`;
     const mailOptions = {
       from: config.USER,
       to: user.email,
@@ -130,7 +130,7 @@ export default class SessionRepository {
         from: config.USER,
         to: email,
         subject: "Restablecer tu contraseña",
-        html: `Haz click en el siguiente link para restablecer tu contraseña: http://localhost:8080/api/session/resetPasswordForm/${token}`,
+        html: `Haz click en el siguiente link para restablecer tu contraseña: ${config.session}/resetPasswordForm/${token}`,
       };
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) throw new Error("Error al enviar el mail");

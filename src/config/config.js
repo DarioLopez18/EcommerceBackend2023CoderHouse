@@ -19,4 +19,7 @@ export default {
   PASS: process.env.PASS,
   environment: process.env.environment,
   keyPrivate: process.env.keyPrivate,
+  suces: process.env.sucess,
+  cancel: process.env.cancel,
+  session: process.env.session
 };
