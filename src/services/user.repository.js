@@ -99,8 +99,10 @@ export default class UserRepository {
         }
         if (user.rol === "user" && user.documents.length >= 4) {
           user.rol = "premium";
-          await this.userDAO.updateUser(user._id, user);
-          return user;
+          const id = user._id;
+          const userDB = await this.userDAO.updateUser(id, user);
+          return userDB;
+          
         } else if (user.rol === "premium") {
           user.rol = "user";
           await this.userDAO.updateUser(user._id, user);

@@ -1,3 +1,4 @@
+import userModel from "./models/user.mongo.model.js";
 import UserModel from "./models/user.mongo.model.js";
 
 export default class UsersMongo {
@@ -45,7 +46,12 @@ export default class UsersMongo {
   };
   async updateUser(id, data) {
     try {
-      if ((id, data)) return await UserModel.findByIdAndUpdate(id, data);
+      if ((id, data)){
+        const user = await UserModel.findByIdAndUpdate(id, data);
+        const userDB = await userModel.findById(id);
+        console.log(userDB)
+        return userDB;
+      }
     } catch (e) {
       throw e;
     }
