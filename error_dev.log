@@ -220,3 +220,6 @@
 {"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-12T16:29:36.959Z"}
 {"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-12T16:35:30.019Z"}
 {"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-12T19:02:55.406Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-12T22:04:26.865Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-12T22:05:34.727Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-12T22:05:48.477Z"}

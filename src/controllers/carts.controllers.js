@@ -1,4 +1,4 @@
-import { cartRepository } from "../services/index.js";
+import { cartRepository, userRepository } from "../services/index.js";
 import { Types } from "mongoose";
 import CustomError from "../errors/CustomError.js";
 import EErrors from "../errors/enums.js";
@@ -127,7 +127,8 @@ export const updateProductCartById = async (req, res) => {
 export const getTicketCartUserById = async (req, res) => {
   try {
     const user = req.user;
-    const ticket = await cartRepository.getTicketCartUserById(user.user._id);
+    const userDb = await userRepository.getUserByEmail(user.user.email)
+    const ticket = await cartRepository.getTicketCartUserById(userDb._id);
     if (ticket) {
       res.status(200).render("ticket", ticket);
     } else {
