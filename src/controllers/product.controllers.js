@@ -1,4 +1,8 @@
-import { productRepository, categoryRepository } from "../services/index.js";
+import {
+  productRepository,
+  categoryRepository,
+  userRepository,
+} from "../services/index.js";
 import CustomError from "../errors/CustomError.js";
 import EErrors from "../errors/enums.js";
 import { generateCartErrorInfo } from "../errors/info.js";
@@ -6,7 +10,10 @@ import { generateCartErrorInfo } from "../errors/info.js";
 export const getProducts = async (req, res) => {
   try {
     const { user } = req.user;
-    const { first_name, last_name, rol } = user;
+    const userDB = await userRepository.getUserByEmail(user.email);
+    const first_name = userDB.first_name;
+    const last_name = userDB.last_name;
+    const rol = userDB.rol;
     const page = parseInt(req.query.page) || 10;
     const limit = parseInt(req.query.limit) || 10;
     const queryParams = req.query.query || "";
@@ -48,7 +55,10 @@ export const getProducts = async (req, res) => {
 export const getProductsRealTime = async (req, res) => {
   try {
     const { user } = req.user;
-    const { first_name, last_name, rol } = user;
+    const userDB = await userRepository.getUserByEmail(user.email);
+    const first_name = userDB.first_name;
+    const last_name = userDB.last_name;
+    const rol = userDB.rol;
     const page = parseInt(req.query.page) || 10;
     const limit = parseInt(req.query.limit) || 10;
     const queryParams = req.query.query || "";
