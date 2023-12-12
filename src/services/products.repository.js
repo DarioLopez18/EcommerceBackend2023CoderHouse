@@ -87,7 +87,8 @@ export default class ProductRepository {
           const mailOptions = {
             to: producto.owner,
             subject: "Tu producto ha sido eliminado por no cumplir con nuestras normas",
-            text: "Tu producto ha sido eliminado por no cumplir con nuestras normas",
+            text: `El producto ${producto.title} ${producto.descripcion} ha sido eliminado. Contactarse con
+            el servicio tecnico.`,
           };
           await transporter.sendMail(mailOptions);
         }
