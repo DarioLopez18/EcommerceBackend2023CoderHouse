@@ -118,13 +118,11 @@
 <section class="container mt-3" style="margin: 0 auto;">
   <div class="row">
     <div class="col-lg-6" style="margin: 0 auto;">
-      <h2 class="titulo-categoria">Categorias</h2>
+      <h2 class="titulo-categoria">Categorys</h2>
       <form id="form-category">
         <div class="mb-3">
-          <label
-            for="category"
-            class="form-label"
-          >Seleccione una categoría</label>
+          <label for="category" class="form-label">
+            Category</label>
           <select
             id="category"
             name="category"
@@ -132,15 +130,15 @@
             required
             style="height: 45px; border: 2px solid black;margin-bottom:20px; border-radius: 10px;"
           >
-            <option selected disabled>Seleccione una opción</option>
+            <option selected disabled>Select an option</option>
             {{#each category}}
               <option value="{{name}}">{{name}}</option>
             {{/each}}
           </select>
         </div>
         <div class="mb-3">
-          <label for="price" class="form-label">Ordenar
-            por precio</label>
+          <label for="price" class="form-label">
+            Sort by price</label>
           <select
             id="price"
             name="sort"
@@ -148,23 +146,24 @@
             required
             style="height: 45px; border: 2px solid black;margin-bottom:20px; border-radius: 10px;"
           >
-            <option selected disabled>Seleccione una opción</option>
-            <option value="1">Menor Precio</option>
-            <option value="-1">Mayor Precio</option>
+            <option selected disabled>Select an option</option>
+            <option value="1">Lower price</option>
+            <option value="-1">
+              Higher price</option>
           </select>
         </div>
         <div class="d-flex flex-column">
-          <button class="btn btn-primary" type="submit">FILTRAR</button>
+          <button class="btn btn-primary" type="submit">FILTER</button>
           <a class="" href="/" style="width: 100%;">
             <button
               class="btn btn-primary"
               style="width: 100%;margin-top:20px"
-            >Volver</button>
+            >RETURN</button>
           </a>
         </div>
       </form>
     </div>
-    <h2 style="text-align: center;margin-top:20px;color:white">TODOS LOS PRODUCTOS</h2>
+    <h2 style="text-align: center;margin-top:20px;color:white">ALL THE PRODUCTS</h2>
   </div>
 </section>
 
