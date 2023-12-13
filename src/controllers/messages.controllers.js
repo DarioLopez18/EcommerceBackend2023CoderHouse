@@ -2,7 +2,7 @@ import { messageRepository } from "../services/index.js";
 
 export const getMessages = async (req, res) => {
   try {
-    if (req.user.user.rol === "user") {
+    if (req.user.user.rol === "user" || req.user.user.rol === "premium" || req.user.user.rol === "admin") {
       const messages = await messageRepository.getMessages();
       res.status(200).render("chat", { messages });
     } else {
