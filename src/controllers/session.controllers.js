@@ -122,7 +122,7 @@ export const validPassword = async (req, res) => {
     const message = {
       message: "La contraseña ha sido cambiada con exito."
     }
-    res.render("login", {});
+    res.render("popUp", message);
   } catch (error) {
     req.logger.fatal("Error al validar la contraseña");
     const message = {
