@@ -263,3 +263,4 @@
 {"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-13T14:02:35.853Z"}
 {"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-13T14:02:38.322Z"}
 {"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-13T14:04:11.721Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-13T18:22:21.736Z"}
