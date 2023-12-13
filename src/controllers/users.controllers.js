@@ -68,9 +68,13 @@ export const uploadDocuments = async (req, res) => {
     const uid = req.params.uid;
     const files = req.files;
     const userDB = await userRepository.uploadDocuments(uid, files);
-    res
-      .status(200)
-      .json({ message: "Documents uploaded successfully", userDB });
+    const message = {
+      message: "Felicidades, sus documentos han sido subidos con éxito",
+    };
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(200).render("popUp", { message, URI });
   } catch (error) {
     const message = {
       message: error,
@@ -118,11 +122,11 @@ export const deleteUser = async (req, res) => {
     const { uid } = req.params;
     const deleteUser = await userRepository.deleteUser(uid);
     const message = {
-      message: "Usuario eliminado con exito"
-    }
+      message: "Usuario eliminado con exito",
+    };
     const URI = {
-      URI: "/api/users"
-    }
+      URI: "/api/users",
+    };
     res.status(500).render("popUp", { message, URI });
   } catch (e) {
     const message = {
