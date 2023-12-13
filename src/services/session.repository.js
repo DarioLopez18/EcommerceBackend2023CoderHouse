@@ -49,7 +49,7 @@ export default class SessionRepository {
       const date = new Date();
       userDB.last_connection = date;
       await this.userDAO.updateUser(userDB._id, userDB);
-      return new UserDTO(userDB);
+      return userDB;
     } catch (e) {
       throw e;
     }
