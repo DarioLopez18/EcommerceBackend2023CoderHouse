@@ -27,7 +27,11 @@ export const registerUser = async (req, res) => {
   try {
     const user = await sessionRepository.registerUser(req.body);
     req.logger.info("Usuario registrado");
-    res.redirect("/api/session/login");
+    const message = {
+      message:
+        "Se enviaron las instrucciones al mail para poder activar tu cuenta.De lo contrario no podras iniciar session",
+    };
+    res.render("popUp", message);
   } catch (error) {
     req.logger.fatal("Error al registrar el usuario");
     res.status(500).json({ error: error.message });
@@ -116,7 +120,7 @@ export const getProfile = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
-  const {user} = req.user;
+  const { user } = req.user;
   await sessionRepository.setDateController(user);
   res.clearCookie("keyCookieForJWT").redirect("/api/session/login");
 };

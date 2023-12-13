@@ -226,3 +226,6 @@
 {"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-13T03:50:39.615Z"}
 {"level":"fatal","message":"Error al agregar el producto","timestamp":"2023-12-13T04:13:42.335Z"}
 {"level":"fatal","message":"Error al cambiar a usuario premium","timestamp":"2023-12-13T04:15:52.075Z"}
+{"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-13T05:01:10.417Z"}
+{"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-13T05:07:07.114Z"}
+{"level":"fatal","message":"Error al registrar el usuario","timestamp":"2023-12-13T05:11:03.867Z"}
