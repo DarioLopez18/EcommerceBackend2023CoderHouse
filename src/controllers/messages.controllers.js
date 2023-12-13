@@ -11,7 +11,11 @@ export const getMessages = async (req, res) => {
     }
   } catch (error) {
     req.logger.fatal("Error al obtener los mensajes");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const saveMessage = async (req, res) => {
@@ -20,6 +24,10 @@ export const saveMessage = async (req, res) => {
     res.status(201).json(message);
   } catch (error) {
     req.logger.fatal("Error al guardar el mensaje");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };

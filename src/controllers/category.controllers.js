@@ -5,7 +5,11 @@ export const getCategories = async (req, res) => {
     res.status(200).json(categories);
   } catch (error) {
     req.logger.fatal("Error al obtener las categorias");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const getCategoryById = async (req, res) => {
@@ -14,7 +18,11 @@ export const getCategoryById = async (req, res) => {
     res.status(200).json(category);
   } catch (error) {
     req.logger.fatal("Error al obtener la categoria");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const addCategory = async (req, res) => {
@@ -23,7 +31,11 @@ export const addCategory = async (req, res) => {
     res.status(201).json(category);
   } catch (error) {
     req.logger.fatal("Error al agregar la categoria");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const updateCategory = async (req, res) => {
@@ -35,6 +47,10 @@ export const updateCategory = async (req, res) => {
     res.status(200).json(category);
   } catch (error) {
     req.logger.fatal("Error al actualizar la categoria");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };

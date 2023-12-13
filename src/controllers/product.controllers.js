@@ -48,7 +48,11 @@ export const getProducts = async (req, res) => {
     });
   } catch (error) {
     req.logger.fatal("Error al obtener los productos");
-    res.send({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -102,7 +106,11 @@ export const getProductsRealTime = async (req, res) => {
     }
   } catch (error) {
     req.logger.fatal("Error al obtener los productos");
-    res.send({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -112,7 +120,11 @@ export const getProductById = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     req.logger.fatal("Error al obtener el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const addProduct = async (req, res) => {
@@ -121,7 +133,11 @@ export const addProduct = async (req, res) => {
     res.status(201).send(product);
   } catch (error) {
     req.logger.fatal("Error al agregar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const updateProduct = async (req, res) => {
@@ -133,7 +149,11 @@ export const updateProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     req.logger.fatal("Error al actualizar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const deleteProduct = async (req, res) => {
@@ -145,7 +165,11 @@ export const deleteProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     req.logger.fatal("Error al eliminar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const getProductsPaginate = async (req, res) => {
@@ -159,7 +183,11 @@ export const getProductsPaginate = async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     req.logger.fatal("Error al obtener los productos");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 export const getProductsLimit = async (req, res) => {
@@ -169,6 +197,10 @@ export const getProductsLimit = async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     req.logger.fatal("Error al obtener los productos");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };

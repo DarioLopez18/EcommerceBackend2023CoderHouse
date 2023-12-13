@@ -10,7 +10,11 @@ export const createCart = async (req, res) => {
     res.status(200).json(cart);
   } catch (error) {
     req.logger.fatal("Error al crear el carrito");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -19,7 +23,11 @@ export const getCartById = async (req, res) => {
     res.status(200).json(await cartRepository.getCartById(req.params.cid));
   } catch (error) {
     req.logger.fatal("Error al obtener el carrito");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -33,7 +41,11 @@ export const updateCartById = async (req, res) => {
     res.status(200).json(cart);
   } catch (error) {
     req.logger.fatal("Error al actualizar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -45,7 +57,11 @@ export const deleteCartById = async (req, res) => {
     res.status(200).json(cart);
   } catch (error) {
     req.logger.fatal("Error al eliminar el carrito");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -59,7 +75,11 @@ export const addProductCartByID = async (req, res) => {
     res.status(200).redirect("/api/cart/user");
   } catch (error) {
     req.logger.fatal("Error al agregar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -72,7 +92,11 @@ export const deleteProductCartByID = async (req, res) => {
     res.status(200).json(cart);
   } catch (error) {
     req.logger.fatal("Error al eliminar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -84,7 +108,11 @@ export const deleteProductOneCartById = async (req, res) => {
     res.redirect("/api/cart/user");
   } catch (error) {
     req.logger.fatal("Error al eliminar el producto");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -108,7 +136,11 @@ export const getCartByUserId = async (req, res) => {
     }
   } catch (error) {
     req.logger.fatal("Error al obtener el carrito");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -120,7 +152,11 @@ export const updateProductCartById = async (req, res) => {
     res.redirect("http://localhost:8080/api/carts/user");
   } catch (e) {
     req.logger.fatal("Error al actualizar el producto");
-    res.status(500).json({ error: e.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -142,7 +178,11 @@ export const getTicketCartUserById = async (req, res) => {
     }
   } catch (error) {
     req.logger.fatal("Error al obtener el ticket");
-    res.status(500).json({ error: error.message });
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 

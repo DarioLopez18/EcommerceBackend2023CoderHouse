@@ -7,7 +7,11 @@ export const creacteCheckout = async (req, res) => {
     const session = await paymentService.creacteCheckout(ticketId);
     return res.redirect(session.url);
   } catch (e) {
-    return res.send({ error: "error", message: "Ya ha sido pagado el ticket" });
+    const message = {
+      message:
+        "Ya ha sido pagado el ticket"
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -17,7 +21,11 @@ export const sucessPayment = async (req, res) => {
     const succes = await paymentService.sucessPayment(ticketId);
     return res.render("sucess", succes);
   } catch (e) {
-    throw e;
+    const message = {
+      message:
+        error
+    };
+    res.status(500).render("popUp",message);
   }
 };
 
@@ -25,7 +33,10 @@ export const CancellPayment = async (req, res) => {
   try{
     const ticketId = req.query.ticketId;
     const sucess = await paymentService.cancellPayment(ticketId);
-    return res.redirect("/api/products/products");
+    const message = {
+      message: "Tu compra ha sido cancelada con exito."
+    }
+    return res.render("popUp",message)
   }catch(e){
     throw e;
   }
