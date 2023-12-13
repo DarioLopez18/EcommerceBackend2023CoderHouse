@@ -100,12 +100,7 @@ export default class ProductRepository {
         const product = await this.productDAO.deleteProduct(id);
         return "product deleted";
       }
-      CustomError.createError({
-        name: "Error",
-        message: "User not authorized",
-        code: EErrors.USER_NOT_AUTHORIZED,
-        info: generateProductsErrorInfo(user),
-      });
+      throw "El mail que proporcionó no posee permisos para eliminar productos,ingrese uno válido.";
     } catch (error) {
       throw error;
     }

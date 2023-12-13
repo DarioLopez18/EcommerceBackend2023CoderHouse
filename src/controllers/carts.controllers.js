@@ -92,7 +92,10 @@ export const addProductCartByID = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -117,7 +120,7 @@ export const deleteProductCartByID = async (req, res) => {
     const URI = {
       URI: "/api/products/products",
     };
-    res.status(200).render("popUp", { message, URI });
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -133,9 +136,9 @@ export const deleteProductOneCartById = async (req, res) => {
       message: error,
     };
     const URI = {
-      URI: "/api/products/products"
-    }
-    res.status(200).render("popUp",{message,URI});
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -163,9 +166,9 @@ export const getCartByUserId = async (req, res) => {
       message: error,
     };
     const URI = {
-      URI: "/api/products/products"
-    }
-    res.status(200).render("popUp",{message,URI});
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -181,9 +184,9 @@ export const updateProductCartById = async (req, res) => {
       message: error,
     };
     const URI = {
-      URI: "/api/products/products"
-    }
-    res.status(200).render("popUp",{message,URI});
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -209,8 +212,8 @@ export const getTicketCartUserById = async (req, res) => {
       message: error,
     };
     const URI = {
-      URI: "/api/products/products"
-    }
-    res.status(200).render("popUp",{message,URI});
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };

@@ -179,6 +179,7 @@ export const deleteProduct = async (req, res) => {
     );
     res.status(200).json(product);
   } catch (error) {
+    console.log(error)
     req.logger.fatal("Error al eliminar el producto");
     const message = {
       message:
