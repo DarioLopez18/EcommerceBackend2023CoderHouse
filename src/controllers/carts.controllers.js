@@ -11,10 +11,12 @@ export const createCart = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al crear el carrito");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -24,10 +26,12 @@ export const getCartById = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al obtener el carrito");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -42,10 +46,12 @@ export const updateCartById = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al actualizar el producto");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -58,10 +64,12 @@ export const deleteCartById = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al eliminar el carrito");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -72,14 +80,19 @@ export const addProductCartByID = async (req, res) => {
     const quantity = parseInt(req.body.quantity || 1);
     const idProduct = new Types.ObjectId(pid);
     await cartRepository.addProductCartByID(idProduct, quantity, user);
-    res.status(200).redirect("/api/cart/user");
+    const message = {
+      message: "Producto agregado al carrito correctamente",
+    };
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   } catch (error) {
     req.logger.fatal("Error al agregar el producto");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    res.status(500).render("popUp", message);
   }
 };
 
@@ -89,14 +102,22 @@ export const deleteProductCartByID = async (req, res) => {
       req.params.cid,
       req.params.pid
     );
+    const message = {
+      message: "Carrito eliminado",
+    };
+    const URI = {
+      URI: "/api/products/products",
+    };
     res.status(200).json(cart);
   } catch (error) {
     req.logger.fatal("Error al eliminar el producto");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(200).render("popUp", { message, URI });
   }
 };
 
@@ -109,10 +130,12 @@ export const deleteProductOneCartById = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al eliminar el producto");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 
@@ -137,10 +160,12 @@ export const getCartByUserId = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al obtener el carrito");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 
@@ -153,17 +178,19 @@ export const updateProductCartById = async (req, res) => {
   } catch (e) {
     req.logger.fatal("Error al actualizar el producto");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 
 export const getTicketCartUserById = async (req, res) => {
   try {
     const user = req.user;
-    const userDb = await userRepository.getUserByEmail(user.user.email)
+    const userDb = await userRepository.getUserByEmail(user.user.email);
     const ticket = await cartRepository.getTicketCartUserById(userDb._id);
     if (ticket) {
       res.status(200).render("ticket", ticket);
@@ -179,11 +206,11 @@ export const getTicketCartUserById = async (req, res) => {
   } catch (error) {
     req.logger.fatal("Error al obtener el ticket");
     const message = {
-      message:
-        error
+      message: error,
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
-
-

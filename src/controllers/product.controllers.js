@@ -52,7 +52,10 @@ export const getProducts = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -110,7 +113,10 @@ export const getProductsRealTime = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -124,7 +130,10 @@ export const getProductById = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 export const addProduct = async (req, res) => {
@@ -137,7 +146,10 @@ export const addProduct = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 export const updateProduct = async (req, res) => {
@@ -153,7 +165,10 @@ export const updateProduct = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 export const deleteProduct = async (req, res) => {
@@ -169,7 +184,10 @@ export const deleteProduct = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 export const getProductsPaginate = async (req, res) => {
@@ -187,7 +205,10 @@ export const getProductsPaginate = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 export const getProductsLimit = async (req, res) => {
@@ -201,6 +222,9 @@ export const getProductsLimit = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };

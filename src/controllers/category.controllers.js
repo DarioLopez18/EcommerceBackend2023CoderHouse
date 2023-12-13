@@ -22,7 +22,10 @@ export const getCategoryById = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/session/login"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 export const addCategory = async (req, res) => {
@@ -35,7 +38,10 @@ export const addCategory = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/session/login"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 export const updateCategory = async (req, res) => {
@@ -51,6 +57,9 @@ export const updateCategory = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/session/login"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };

@@ -240,3 +240,13 @@
 {"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-13T05:31:11.102Z"}
 {"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-13T05:32:07.472Z"}
 {"level":"fatal","message":"Error al validar la contraseña","timestamp":"2023-12-13T05:42:14.992Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-13T05:57:21.507Z"}
+{"level":"fatal","message":"Error al obtener el ticket","timestamp":"2023-12-13T06:10:10.514Z"}
+{"level":"fatal","message":"Error al obtener los productos","timestamp":"2023-12-13T06:10:42.735Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-13T06:10:57.491Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-13T06:12:19.504Z"}
+{"level":"fatal","message":"Error al loguear el usuario","timestamp":"2023-12-13T06:12:25.916Z"}
+{"level":"fatal","message":"Error al cambiar a usuario premium","timestamp":"2023-12-13T06:12:34.623Z"}
+{"level":"fatal","message":"Error al obtener el carrito","timestamp":"2023-12-13T06:12:48.601Z"}
+{"level":"fatal","message":"Error al validar la contraseña","timestamp":"2023-12-13T06:16:13.217Z"}
+{"level":"fatal","message":"Error al validar la contraseña","timestamp":"2023-12-13T06:17:42.620Z"}

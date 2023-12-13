@@ -12,14 +12,20 @@ export const getUsers = async (req, res) => {
         message:
           "Usted no se encuentra autorizado para realizar dicha operación",
       };
-      res.status(500).render("popUp", message);
+      const URI = {
+        URI: "/api/products/products",
+      };
+      res.status(500).render("popUp", { message, URI });
     }
   } catch (error) {
     req.logger.fatal("Error al obtener los usuarios");
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -33,7 +39,10 @@ export const getTicketUser = async (req, res) => {
       message:
         "Usted no posee tickets de compra,para verlos por favor haga primero una compra.",
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -47,7 +56,10 @@ export const userPremium = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -63,7 +75,10 @@ export const uploadDocuments = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -76,7 +91,10 @@ export const uploadDocumentView = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -88,7 +106,10 @@ export const inactiveUser = async (req, res) => {
     const message = {
       message: e,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -96,11 +117,20 @@ export const deleteUser = async (req, res) => {
   try {
     const { uid } = req.params;
     const deleteUser = await userRepository.deleteUser(uid);
-    res.status(200).send({ message: "usuario eliminado" });
+    const message = {
+      message: "Usuario eliminado con exito"
+    }
+    const URI = {
+      URI: "/api/users"
+    }
+    res.status(500).render("popUp", { message, URI });
   } catch (e) {
     const message = {
       message: e,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/users",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };

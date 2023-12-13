@@ -15,7 +15,10 @@ export const getMessages = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };
 export const saveMessage = async (req, res) => {
@@ -28,6 +31,9 @@ export const saveMessage = async (req, res) => {
       message:
         error
     };
-    res.status(500).render("popUp",message);
+    const URI = {
+      URI: "/api/products/products"
+    }
+    res.status(200).render("popUp",{message,URI});
   }
 };

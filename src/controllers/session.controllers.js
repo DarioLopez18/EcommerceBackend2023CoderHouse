@@ -22,7 +22,10 @@ export const loginUser = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -34,13 +37,19 @@ export const registerUser = async (req, res) => {
       message:
         "Se enviaron las instrucciones al mail para poder activar tu cuenta.De lo contrario no podras iniciar session",
     };
-    res.render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   } catch (error) {
     req.logger.fatal("Error al registrar el usuario");
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -54,7 +63,10 @@ export const getUserCurrent = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -74,7 +86,10 @@ export const verificarUser = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -86,7 +101,10 @@ export const resetearPassword = async (req, res) => {
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
@@ -96,7 +114,10 @@ export const restart = async (req, res) => {
   const message = {
     message: "Email enviado con las instrucciones para cambiar la contraseña",
   };
-  res.render("popUp", message);
+  const URI = {
+    URI: "/api/session/login",
+  };
+  res.status(200).render("popUp", { message, URI });
 };
 
 export const resetPasswordForm = async (req, res) => {
@@ -107,7 +128,10 @@ export const resetPasswordForm = async (req, res) => {
       const message = {
         message: err,
       };
-      res.status(500).render("popUp", message);
+      const URI = {
+        URI: "/api/session/login",
+      };
+      res.status(500).render("popUp", { message, URI });
     }
     res.status(200).render("formReset");
   });
@@ -122,13 +146,19 @@ export const validPassword = async (req, res) => {
     const message = {
       message: "La contraseña ha sido cambiada con exito."
     }
-    res.render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(200).render("popUp", { message, URI });
   } catch (error) {
     req.logger.fatal("Error al validar la contraseña");
     const message = {
       message: error,
     };
-    res.status(500).render("popUp", message);
+    const URI = {
+      URI: "/api/session/login",
+    };
+    res.status(500).render("popUp", { message, URI });
   }
 };
 
