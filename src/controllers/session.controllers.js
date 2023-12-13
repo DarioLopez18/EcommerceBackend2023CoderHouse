@@ -119,6 +119,9 @@ export const validPassword = async (req, res) => {
     const email = req.body.email;
     const confirmpassword = req.body.confirmPassword;
     await sessionRepository.resetPasswordForm(email, password, confirmpassword);
+    const message = {
+      message: "La contraseña ha sido cambiada con exito."
+    }
     res.render("login", {});
   } catch (error) {
     req.logger.fatal("Error al validar la contraseña");
