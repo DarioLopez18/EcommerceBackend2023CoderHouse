@@ -2,8 +2,17 @@
 
 Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, Node.
 
-![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green)
-![GitHub Org's stars](https://img.shields.io/github/stars/CharlyMoreno/ecommerce-coder-32125)
+<div> 
+    <p align="center">
+        <img
+            src="657b0837e709585ac967fac1.png"
+            alt="Certificado del curso"
+            width="500px"
+            height="500px"
+            align="center"
+        /> 
+     </p>
+</div>
 
 #     
 <p align="center">
