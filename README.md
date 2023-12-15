@@ -7,8 +7,8 @@ Proyecto Final CoderHouse 2023. Ecommerce STACK MERN -> Mongo, Express, React, N
         <img
             src="657b0837e709585ac967fac1.png"
             alt="Certificado del curso"
-            width="3420px"
-            height="2520px"
+            width="500px"
+            height="800px"
             align="center"
         /> 
      </p>
